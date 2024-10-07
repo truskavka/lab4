@@ -1,6 +1,39 @@
 import tkinter as tk
 from tkinter import messagebox
 
+# Функції для операцій
+def add():
+    try:
+        result = float(entry1.get()) + float(entry2.get())
+        result_label.config(text="Результат: " + str(result))
+    except ValueError:
+        messagebox.showerror("Помилка", "Введіть числові значення")
+
+def subtract():
+    try:
+        result = float(entry1.get()) - float(entry2.get())
+        result_label.config(text="Результат: " + str(result))
+    except ValueError:
+        messagebox.showerror("Помилка", "Введіть числові значення")
+
+def multiply():
+    try:
+        result = float(entry1.get()) * float(entry2.get())
+        result_label.config(text="Результат: " + str(result))
+    except ValueError:
+        messagebox.showerror("Помилка", "Введіть числові значення")
+
+def divide():
+    try:
+        denominator = float(entry2.get())
+        if denominator == 0:
+            raise ZeroDivisionError
+        result = float(entry1.get()) / denominator
+        result_label.config(text="Результат: " + str(result))
+    except ZeroDivisionError:
+        messagebox.showerror("Помилка", "Ділення на нуль неможливе")
+    except ValueError:
+        messagebox.showerror("Помилка", "Введіть числові значення")
 
 # Налаштування вікна
 root = tk.Tk()
