@@ -1,12 +1,20 @@
 pipeline {
-    agent {
-      dockerfile true
-    }
+    agent any
     stages {
-        stage('Build') {
+        stage('Build Docker Image') {
             steps {
-                sh 'python -m py_compile main.py'
-                stash(name: 'compiled-results', includes: '*.py*')
+                script {
+                    docker.build('my-image')
+                }
+            }
+        }
+        stage('Run Tests') {
+            steps {
+                script {
+                    docker.image('my-image').inside {
+                        sh 'python -m py_compile main.py'
+                    }
+                }
             }
         }
     }
