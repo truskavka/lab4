@@ -1,9 +1,7 @@
 pipeline {
-    agent {
-      dockerfile true
-    }
+    agent any 
     stages {
-        stage('Build') {
+        stage('Build') { 
             steps {
                 sh 'python -m py_compile main.py'
                 stash(name: 'compiled-results', includes: '*.py*')
