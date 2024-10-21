@@ -7,5 +7,15 @@ pipeline {
                 stash(name: 'compiled-results', includes: '*.py*')
             }
         }
+        stage('Deliver') { 
+            steps {
+                sh "pyinstaller --onefile main.py" 
+            }
+            post {
+                success {
+                    archiveArtifacts 'dist/main' 
+                }
+            }
+        }
     }
 }
